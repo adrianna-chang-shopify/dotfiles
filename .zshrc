@@ -112,8 +112,13 @@ alias k="kubectl"
 plugins=(
   git
   kube-ps1
+  colorize
 )
 
+# kube-ps1 (Kubernetes contexts)
 source /Users/adriannachang/.oh-my-zsh/plugins/kube-ps1/kube-ps1.plugin.zsh
 KUBE_PS1_COLOR_CONTEXT="%{$fg[green]%}"
 PROMPT=$PROMPT'$(kube_ps1) '
+
+# colorize (formatted output on cat)
+alias cat="pygmentize -g"
