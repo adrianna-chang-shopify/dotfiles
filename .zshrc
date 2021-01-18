@@ -100,25 +100,23 @@ source $ZSH/oh-my-zsh.sh
 
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 
-# cloudplatform: add Shopify clusters to your local kubernetes config
-export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/adriannachang/.kube/config:/Users/adriannachang/.kube/config.shopify.cloudplatform
-for file in /Users/adriannachang/src/github.com/Shopify/cloudplatform/workflow-utils/*.bash; do source ${file}; done
-
 export GOPATH=$HOME
 export PATH=$GOPATH/bin:$PATH
-
-alias k="kubectl"
+export EDITOR=code
 
 plugins=(
   git
-  kube-ps1
   colorize
 )
 
-# kube-ps1 (Kubernetes contexts)
-source /Users/adriannachang/.oh-my-zsh/plugins/kube-ps1/kube-ps1.plugin.zsh
-KUBE_PS1_COLOR_CONTEXT="%{$fg[green]%}"
-PROMPT=$PROMPT'$(kube_ps1) '
-
 # colorize (formatted output on cat)
 alias cat="pygmentize -g"
+
+# VS Code
+code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
+
+alias be='bundle exec'
+alias ci='hub ci-status -v @{u}'
+tdd () { git ls-files | entr rails test "$@" }
+
+if [ -e /Users/adriannachang/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/adriannachang/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
