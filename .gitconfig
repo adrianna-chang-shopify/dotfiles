@@ -1,0 +1,29 @@
+[user]
+        name = Adrianna Chang
+        email = adrianna.chang@shopify.com
+[core]
+        editor = code --wait
+        algorithm = patience
+[gc]
+        writeCommitGraph = true
+[protocol]
+        version = 2
+[alias]
+        co = checkout
+        br = branch
+        ci = commit
+        st = status
+        p = push
+        ll = log --oneline
+        d = diff
+        se = !git rev-list --all | xargs git grep -F
+        aca = !git add -A && git commit --amend --no-edit\n
+        rh = reset --hard
+        ac = !git add -A && git commit
+        br-clean = !git branch --merged | grep -v '^*\\|main\\|master' | xargs --no-run-if-empty git branch -d
+[hub]
+        protocol = https
+[pull]
+        rebase = false
+[init]
+        defaultBranch = main
