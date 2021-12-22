@@ -1,29 +1,38 @@
 [user]
-        name = Adrianna Chang
-        email = adrianna.chang@shopify.com
+	name = Adrianna Chang
+	email = adrianna.chang@shopify.com
 [core]
-        editor = code --wait
-        algorithm = patience
+	editor = code --wait
+	commitGraph = true
+[diff]
+	algorithm = patience
 [gc]
-        writeCommitGraph = true
+	writeCommitGraph = true
 [protocol]
-        version = 2
+	version = 2
+[url "https://github.com/Shopify/"]
+	insteadOf = git@github.com:Shopify/
+	insteadOf = git@github.com:shopify/
+	insteadOf = ssh://git@github.com/Shopify/
+	insteadOf = ssh://git@github.com/shopify/
 [alias]
-        co = checkout
-        br = branch
-        ci = commit
-        st = status
-        p = push
-        ll = log --oneline
-        d = diff
-        se = !git rev-list --all | xargs git grep -F
-        aca = !git add -A && git commit --amend --no-edit\n
-        rh = reset --hard
-        ac = !git add -A && git commit
-        br-clean = !git branch --merged | grep -v '^*\\|main\\|master' | xargs --no-run-if-empty git branch -d
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	p = push
+	ll = log --oneline
+	d = diff
+	se = !git rev-list --all | xargs git grep -F
+	aca = !git add -A && git commit --amend --no-edit\n
+	rh = reset --hard
+	ac = !git add -A && git commit
+	br-clean = !git branch --merged | grep -v '^*\\|main\\|master' | xargs -r git branch -d
 [hub]
-        protocol = https
+	protocol = https
 [pull]
-        rebase = false
+	rebase = false
 [init]
-        defaultBranch = main
+	defaultBranch = main
+[help]
+	autocorrect = "prompt"
