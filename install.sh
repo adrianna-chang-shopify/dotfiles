@@ -9,6 +9,9 @@ if [ $SPIN ]; then
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
   cp -v ~/dotfiles/.zshrc ~/.zshrc
+  cp -v ~/dotfiles/.zshrc_spin ~/.zshrc_spin
+  echo 'source $HOME/.zshrc_spin' >> ~/.zshrc
+
   cat ~/dotfiles/.gitconfig >> ~/.gitconfig
 else
   echo "Don't know how to install for this OS or env."
