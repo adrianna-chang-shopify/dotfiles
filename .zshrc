@@ -115,5 +115,3 @@ code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 alias be='bundle exec'
 alias ci='hub ci-status -v @{u}'
 tdd () { git ls-files | entr rails test "$@" }
-
-if [ -e /Users/adriannachang/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/adriannachang/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
