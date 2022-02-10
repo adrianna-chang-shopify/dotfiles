@@ -109,9 +109,6 @@ plugins=(
   colorize
 )
 
-# colorize (formatted output on cat)
-alias cat="pygmentize -g"
-
 # VS Code
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 
