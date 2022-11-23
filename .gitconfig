@@ -23,11 +23,14 @@
 	p = push
 	ll = log --oneline
 	d = diff
+	sw = switch
 	se = !git rev-list --all | xargs git grep -F
 	aca = !git add -A && git commit --amend --no-edit\n
 	rh = reset --hard
 	ac = !git add -A && git commit
 	br-clean = !git branch --merged | grep -v '^*\\|main\\|master' | xargs -r git branch -d
+	po = !git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\"
+	pushf = push --force
 [hub]
 	protocol = https
 [pull]
@@ -38,3 +41,9 @@
 	autocorrect = "prompt"
 [commit]
 	verbose = true
+[push]
+	autoSetupRemote = true
+[branch]
+	autosetupmerge = always
+[rebase]
+	autosquash = true
