@@ -3,34 +3,47 @@
 	email = adrianna.chang@shopify.com
 [core]
 	editor = code --wait
-	commitGraph = true
-[diff]
-	algorithm = patience
-[gc]
-	writeCommitGraph = true
-[protocol]
-	version = 2
-[url "https://github.com/Shopify/"]
-	insteadOf = git@github.com:Shopify/
-	insteadOf = git@github.com:shopify/
-	insteadOf = ssh://git@github.com/Shopify/
-	insteadOf = ssh://git@github.com/shopify/
+	excludesFile = ~/.gitignore
 [alias]
 	co = checkout
 	br = branch
 	ci = commit
 	st = status
 	p = push
+	pr = pull --rebase
+	pp = !git pr && git push
+	dh = diff HEAD
 	ll = log --oneline
 	d = diff
-	sw = switch
 	se = !git rev-list --all | xargs git grep -F
 	aca = !git add -A && git commit --amend --no-edit\n
 	rh = reset --hard
 	ac = !git add -A && git commit
 	br-clean = !git branch --merged | grep -v '^*\\|main\\|master' | xargs -r git branch -d
+	sw = switch
 	po = !git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\"
-	pushf = push --force
+	cp = cherry-pick
+	recreate = "!f() { [[ -n $@ ]] && git checkout \"$@\" && git unpublish && git checkout main && git branch -D \"$@\" && git checkout -b \"$@\" && git publish; }; f"
+	ri = "!f() { git rebase -i HEAD~$1; }; f"
+	wip = !git add . && git commit -m 'WIP'
+	rbm = !git fetch $(git default-remote) $(git default-branch) && git rebase $(git default-remote)/$(git default-branch)
+	pm = !git checkout $(git default-branch) && git fetch $(git default-remote) $(git default-branch) && git reset --hard $(git default-remote)/$(git default-branch)
+		default-branch = "!default_branch() { \
+		if git rev-parse --verify main > /dev/null 2>&1; then \
+			echo main; \
+		else \
+			echo master; \
+		fi; \
+	}; \
+	default_branch"
+	default-remote = "!default_remote() { \
+		if git remote | grep upstream > /dev/null 2>&1; then \
+			echo upstream; \
+		else \
+			echo origin; \
+		fi; \
+	}; \
+	default_remote"
 [hub]
 	protocol = https
 [pull]
@@ -41,6 +54,12 @@
 	autocorrect = "prompt"
 [commit]
 	verbose = true
+[include]
+	path = /Users/adriannachang/.config/dev/gitconfig
+[merge]
+	tool = code
+[mergetool "code"]
+	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
 [push]
 	autoSetupRemote = true
 [branch]
